@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(Hello-World)
 
+##########################################################################################################
+## FUNCTIONS
+##########################################################################################################
 function(PASS_VAR_NAMES n a)
   message("++++++++++ PASS_VAR_NAMES: Print by single de-referencing: " ${n} " " ${a})
   message("++++++++++ PASS_VAR_NAMES: Print by two de-referencing: " ${${n}} " " ${${a}} "\n")
@@ -39,7 +42,36 @@ function(COMP_ADDR intro name address a)
   SET(${intro} ${${name}} " is " ${${a}} "years old and lives at " ${${address}}  PARENT_SCOPE) 
 endfunction() 
 
+function(DEMO_DEFAULT_ARGS)
+  foreach(arg ${ARGV})
+    message("1.arg=" ${arg})
+  endforeach()
+
+  foreach(arg IN LISTS ${ARGV})
+    message("2.arg=" ${arg})
+  endforeach()
+
+  if(ARGV4)
+    message("Fourth argment=" ${ARGV4})
+  endif()
+endfunction()
+
+
+##########################################################################################################
+## MACROS
+##########################################################################################################
+macro(MAC_CREATE_A)
+  SET(A 111111)
+endmacro()
+
+macro(MAC_CREATE_B)
+  SET(B 222222)
+endmacro()
+
  
+##########################################################################################################
+## FUNCTION tests
+##########################################################################################################
 SET(Name "Tom")
 SET(Age "UNDEFINED")
 
@@ -62,6 +94,19 @@ SET(Address "One Nation str. 21, 13423, Mars")
 SET(Comp "None")
 COMP_ADDR(Comp Name Address Age)
 message("++++++++++ " ${Comp} ". Age=" ${Age} "\n")
+
+DEMO_DEFAULT_ARGS(1 2 3 "Four" "Five" 6 7)
+
+##########################################################################################################
+## MACROS tests
+##########################################################################################################
+message("")
+message("++++++++++ Value A=" ${A} " before the call to the Macro")
+message("++++++++++ Value B=" ${B} " before the call to the Macro")
+MAC_CREATE_A()
+MAC_CREATE_B()
+message("++++++++++ Value A=" ${A} " after the call to the Macro")
+message("++++++++++ Value B=" ${B} " after the call to the Macro")
 
 
 add_executable(hello main.cpp)
