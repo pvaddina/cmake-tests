@@ -6,4 +6,6 @@ set (SRCS src/add.cpp )
 add_library(add STATIC ${SRCS})
 target_include_directories(add PUBLIC inc)
 
+install(TARGETS add DESTINATION lib)
+
 

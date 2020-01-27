@@ -6,5 +6,5 @@ project(Calculator)
 add_executable(calc calc.cpp)
 target_link_libraries(calc add mul)
 
-
+install(TARGETS calc DESTINATION bin)
 

@@ -1,5 +1,32 @@
-# Demonstration of target link libraries
+# Demonstration of CMake install options
 
-The idea here is to demonstrate the power of target_link_libraries and the visibility control 'public'. The calculator depends on add_lib and mul_lib libraries. This example will show how linking against these libraries is enough to get the include paths where the required headers are defined (add.h and mul.h), because the libraries are using the target_include_directories instead of the traditional include_directories
+[CMake example on Testing and Installing](https://cmake.org/cmake/help/latest/guide/tutorial/index.html#installing-and-testing-step-4)
 
+When installing the project, where are the files installed ? Here a snipppet from the same link above
+> The CMake variable CMAKE_INSTALL_PREFIX is used to determine the root of where the files will be installed. 
+> If using cmake --install a custom installation directory can be given via --prefix argument. For 
+> multi-configuration tools, use the --config argument to specify the configuration.
+
+If you see an error like while installing the project (ex: 'make install') 
+> [ 50%] Built target add
+> [100%] Built target mul
+> Install the project...
+> -- Install configuration: ""
+> -- Installing: /usr/local/lib/libadd.a
+> CMake Error at add_lib/cmake_install.cmake:41 (file):
+>   file INSTALL cannot copy file
+>   "/home/vaddina/workspace/cmake-tests/install/calc_lib/build/add_lib/libadd.a"
+>   to "/usr/local/lib/libadd.a".
+> Call Stack (most recent call first):
+>   cmake_install.cmake:42 (include)
+
+Then try the same command with higher privileges:
+> sudo make install
+> [sudo] password for vaddina: 
+> [ 50%] Built target add
+> [100%] Built target mul
+> Install the project...
+> -- Install configuration: ""
+> -- Installing: /usr/local/lib/libadd.a
+> -- Installing: /usr/local/lib/libmul.a
 
