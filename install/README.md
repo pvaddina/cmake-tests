@@ -7,6 +7,10 @@ When installing the project, where are the files installed ? Here a snipppet fro
 > If using cmake --install a custom installation directory can be given via --prefix argument. For 
 > multi-configuration tools, use the --config argument to specify the configuration.
 
+Another quote from [CMake documentation on CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/v2.8.8/cmake.html#variable%3aCMAKE_INSTALL_PREFIX)
+> If "make install" is invoked or INSTALL is built, this directory is pre-pended onto all 
+> install directories. This variable defaults to /usr/local on UNIX and c:/Program Files on Windows.
+
 If you see an error like while installing the project (ex: 'make install') 
 > [ 50%] Built target add
 > [100%] Built target mul
@@ -29,4 +33,5 @@ Then try the same command with higher privileges:
 > -- Install configuration: ""
 > -- Installing: /usr/local/lib/libadd.a
 > -- Installing: /usr/local/lib/libmul.a
+
 
