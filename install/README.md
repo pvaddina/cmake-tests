@@ -14,6 +14,7 @@ Another quote from [CMake documentation on CMAKE_INSTALL_PREFIX](https://cmake.o
 If you see an error like while installing the project (ex: 'make install') 
 
 ```bash
+>> make install
  [ 50%] Built target add
  [100%] Built target mul
  Install the project...
@@ -30,7 +31,7 @@ If you see an error like while installing the project (ex: 'make install')
 Then try the same command with higher privileges:
 
 ```bash
- sudo make install
+>> sudo make install
  [sudo] password for vaddina: 
  [ 50%] Built target add
  [100%] Built target mul

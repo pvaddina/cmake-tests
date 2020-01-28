@@ -6,6 +6,7 @@ set (SRCS src/add.cpp )
 add_library(add STATIC ${SRCS})
 target_include_directories(add PUBLIC inc)
 
-install(TARGETS add DESTINATION lib)
+install(TARGETS add DESTINATION gen/lib)
+install(FILES inc/add.h DESTINATION gen/include)
 
 
