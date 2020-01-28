@@ -12,26 +12,32 @@ Another quote from [CMake documentation on CMAKE_INSTALL_PREFIX](https://cmake.o
 > install directories. This variable defaults to /usr/local on UNIX and c:/Program Files on Windows.
 
 If you see an error like while installing the project (ex: 'make install') 
-> [ 50%] Built target add
-> [100%] Built target mul
-> Install the project...
-> -- Install configuration: ""
-> -- Installing: /usr/local/lib/libadd.a
-> CMake Error at add_lib/cmake_install.cmake:41 (file):
->   file INSTALL cannot copy file
->   "/home/vaddina/workspace/cmake-tests/install/calc_lib/build/add_lib/libadd.a"
->   to "/usr/local/lib/libadd.a".
-> Call Stack (most recent call first):
->   cmake_install.cmake:42 (include)
+
+```bash
+ [ 50%] Built target add
+ [100%] Built target mul
+ Install the project...
+ -- Install configuration: ""
+ -- Installing: /usr/local/lib/libadd.a
+ CMake Error at add_lib/cmake_install.cmake:41 (file):
+   file INSTALL cannot copy file
+   "/home/vaddina/workspace/cmake-tests/install/calc_lib/build/add_lib/libadd.a"
+   to "/usr/local/lib/libadd.a".
+ Call Stack (most recent call first):
+   cmake_install.cmake:42 (include)
+```
 
 Then try the same command with higher privileges:
-> sudo make install
-> [sudo] password for vaddina: 
-> [ 50%] Built target add
-> [100%] Built target mul
-> Install the project...
-> -- Install configuration: ""
-> -- Installing: /usr/local/lib/libadd.a
-> -- Installing: /usr/local/lib/libmul.a
+
+```bash
+ sudo make install
+ [sudo] password for vaddina: 
+ [ 50%] Built target add
+ [100%] Built target mul
+ Install the project...
+ -- Install configuration: ""
+ -- Installing: /usr/local/lib/libadd.a
+ -- Installing: /usr/local/lib/libmul.a
+```
 
 
