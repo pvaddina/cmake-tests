@@ -8,4 +8,4 @@ target_include_directories(mul PUBLIC inc)
 
 install(TARGETS mul DESTINATION gen/lib)
 install(FILES inc/mul.h DESTINATION gen/include)
-
+install(EXPORT mul FILE mul.cmake NAMESPACE calc:: DESTINATION gen/cmake)
