@@ -11,6 +11,22 @@ add_library(mul STATIC ${SRCS})
 # 
 target_include_directories(mul PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>)
 
-install(TARGETS mul DESTINATION gen/lib EXPORT mulExport)
-install(FILES inc/mul.h DESTINATION gen/include)
-install(EXPORT mulExport FILE mul.cmake NAMESPACE calc:: DESTINATION gen/cmake)
+# Install target files of the project and define an export called 'mulTarget'.
+# Note that the export file itself is not generated and installed in this command
+install(TARGETS mul 
+        EXPORT mulTarget
+        RUNTIME DESTINATION gen
+        LIBRARY DESTINATION gen/lib
+        ARCHIVE DESTINATION gen/lib)
+
+# Specify install rules to install the include files
+install(DIRECTORY inc/ 
+        DESTINATION gen/include 
+        FILES_MATCHING PATTERN "*.h")
+
+install(EXPORT mulTarget
+        FILE mulTarget.cmake 
+        NAMESPACE calc:: 
+        DESTINATION gen/cmake)
+
+
