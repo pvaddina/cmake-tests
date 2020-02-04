@@ -15,18 +15,31 @@ target_include_directories(mul PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_D
 # Note that the export file itself is not generated and installed in this command
 install(TARGETS mul 
         EXPORT mulTarget
-        RUNTIME DESTINATION gen
-        LIBRARY DESTINATION gen/lib
-        ARCHIVE DESTINATION gen/lib)
+        RUNTIME DESTINATION calc_lib
+        LIBRARY DESTINATION calc_lib/lib
+        ARCHIVE DESTINATION calc_lib/lib)
 
 # Specify install rules to install the include files
 install(DIRECTORY inc/ 
-        DESTINATION gen/include 
+        DESTINATION calc_lib/include 
         FILES_MATCHING PATTERN "*.h")
 
+
 install(EXPORT mulTarget
-        FILE mulTarget.cmake 
+        FILE mul.cmake 
         NAMESPACE calc:: 
-        DESTINATION gen/cmake)
+        DESTINATION calc_lib/cmake)
+
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file("mulConfigVersion.cmake"
+                                  VERSION 1
+                                  COMPATIBILITY SameMajorVersion
+                                  )
+
+install(FILES "mulConfigVersion.cmake"
+        DESTINATION calc_lib/cmake
+        )
+
 
 
