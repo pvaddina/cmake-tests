@@ -32,12 +32,14 @@ install(EXPORT mulTarget
 
 include(CMakePackageConfigHelpers)
 
-write_basic_package_version_file("mulConfigVersion.cmake"
-                                  VERSION 1
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/mulConfigVersion.cmake
+                                  VERSION 1.1.10
                                   COMPATIBILITY SameMajorVersion
                                   )
 
-install(FILES "mulConfigVersion.cmake"
+message(${CMAKE_INSTALL_PREFIX})
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/mulConfigVersion.cmake
         DESTINATION calc_lib/cmake
         )
 
