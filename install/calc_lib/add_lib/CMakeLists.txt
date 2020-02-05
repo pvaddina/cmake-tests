@@ -38,5 +38,8 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/addConfigVersion.cmake ${CMAKE_CURRENT
         DESTINATION calc_lib/cmake
        )
 
+export(EXPORT addExport
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/add.cmake"
+)
 
 

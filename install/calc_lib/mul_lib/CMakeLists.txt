@@ -11,10 +11,14 @@ add_library(mul STATIC ${SRCS})
 # 
 target_include_directories(mul PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>)
 
-# Install target files of the project and define an export called 'mulTarget'.
+#############################################################################################
+# Installing the library and the include headers
+#############################################################################################
+
+# Install target files of the project and define an export configuration called 'mulExport'.
 # Note that the export file itself is not generated and installed in this command
 install(TARGETS mul 
-        EXPORT mulTarget
+        EXPORT mulExport
         RUNTIME DESTINATION calc_lib
         LIBRARY DESTINATION calc_lib/lib
         ARCHIVE DESTINATION calc_lib/lib)
@@ -24,15 +28,18 @@ install(DIRECTORY inc/
         DESTINATION calc_lib/include 
         FILES_MATCHING PATTERN "*.h")
 
-
-install(EXPORT mulTarget
+# Install the export configuration as 'mul.cmake' with the given namespae and at the given destination
+install(EXPORT mulExport
         FILE mul.cmake 
         NAMESPACE calc:: 
         DESTINATION calc_lib/cmake)
 
+#############################################################################################
+# Steps to generate the mulConfig.cmake which is required for find_package to discover the lib
+#############################################################################################
 include(CMakePackageConfigHelpers)
 
-# generate the config file that is includes the exports
+# generate the config file that includes the exports
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
                               "${CMAKE_CURRENT_BINARY_DIR}/mulConfig.cmake"
                               INSTALL_DESTINATION "calc_lib/cmake"
@@ -40,13 +47,22 @@ configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
                               NO_CHECK_REQUIRED_COMPONENTS_MACRO
                               )
 
+# generate the version file for the config file
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/mulConfigVersion.cmake
                                   VERSION 1.1.10
                                   COMPATIBILITY SameMajorVersion
                                   )
-
+# Install the generated configuration files
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/mulConfigVersion.cmake ${CMAKE_CURRENT_BINARY_DIR}/mulConfig.cmake 
         DESTINATION calc_lib/cmake
         )
+
+# At this point, we have generated a relocatable CMake Configuration for our project that 
+# can be used after the project has been installed or packaged. If we want our project to 
+# also be used from a build directory we only have to add the following to the bottom of the 
+#top level CMakeLists.txt
+export(EXPORT mulExport
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/mul.cmake"
+)
 
 
