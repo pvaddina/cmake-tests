@@ -4,12 +4,20 @@ project(Mul-Library)
 set (SRCS src/mul.cpp)
 
 add_library(mul STATIC ${SRCS})
+
 # 
-# Note if the directory is simply set as 'inc' instead of the generator expression, this will generate a warning
-# as a hard coded path valid only for this PC will be generated and used in the export configurations, which
-# will obviously not work when consumed on another PC
+# Note if the directory is simply set as 'inc' instead of the generator expression, this 
+# will generate a warning as a hard coded path valid only for this PC will be generated and 
+# used in the export configurations, which will obviously not work when consumed on another PC
 # 
-target_include_directories(mul PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>)
+# Also note that without adding the include directory with the INSTALL_INTERFACE, the directory
+# where the project is installed cannot be accessed for include files
+target_include_directories(mul
+PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+PUBLIC
+  $<INSTALL_INTERFACE:calc_lib/include>
+)
 
 #############################################################################################
 # Installing the library and the include headers
@@ -45,7 +53,7 @@ configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
                               INSTALL_DESTINATION "calc_lib/cmake"
                               NO_SET_AND_CHECK_MACRO
                               NO_CHECK_REQUIRED_COMPONENTS_MACRO
-                              )
+                             )
 
 # generate the version file for the config file
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/mulConfigVersion.cmake

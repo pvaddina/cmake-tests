@@ -4,7 +4,12 @@ project(Add-Library)
 set (SRCS src/add.cpp )
 
 add_library(add STATIC ${SRCS})
-target_include_directories(add PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>)
+target_include_directories(add 
+PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
+PUBLIC
+  $<INSTALL_INTERFACE:calc_lib/include>
+)
 
 install(TARGETS add 
         DESTINATION calc_lib/lib 
