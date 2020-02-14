@@ -11,7 +11,7 @@ add_library(mul STATIC ${SRCS})
 # used in the export configurations, which will obviously not work when consumed on another PC
 # 
 # Also note that without adding the include directory with the INSTALL_INTERFACE, the directory
-# where the project is installed cannot be accessed for include files
+# where the project is installed cannot be accessed by projects dependent on this library
 target_include_directories(mul
 PRIVATE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
@@ -36,9 +36,9 @@ install(DIRECTORY inc/
         DESTINATION calc_lib/include 
         FILES_MATCHING PATTERN "*.h")
 
-# Install the export configuration as 'mul.cmake' with the given namespae and at the given destination
+# Install the export configuration as 'mulExport.cmake' with the given namespae and at the given destination
 install(EXPORT mulExport
-        FILE mul.cmake 
+        FILE mulExport.cmake 
         NAMESPACE calc:: 
         DESTINATION calc_lib/cmake)
 
@@ -48,7 +48,7 @@ install(EXPORT mulExport
 include(CMakePackageConfigHelpers)
 
 # generate the config file that includes the exports
-configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/../Config.cmake.in
                               "${CMAKE_CURRENT_BINARY_DIR}/mulConfig.cmake"
                               INSTALL_DESTINATION "calc_lib/cmake"
                               NO_SET_AND_CHECK_MACRO
@@ -70,7 +70,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/mulConfigVersion.cmake ${CMAKE_CURRENT
 # also be used from a build directory we only have to add the following to the bottom of the 
 #top level CMakeLists.txt
 export(EXPORT mulExport
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/mul.cmake"
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/mulExport.cmake"
 )
 
 

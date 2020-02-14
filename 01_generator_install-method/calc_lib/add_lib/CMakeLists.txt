@@ -20,14 +20,14 @@ install(DIRECTORY inc/
         FILES_MATCHING PATTERN "*.h")
 
 install(EXPORT addExport 
-        FILE add.cmake 
+        FILE addExport.cmake 
         NAMESPACE calc:: 
         DESTINATION calc_lib/cmake)
 
 include(CMakePackageConfigHelpers)
 
 # generate the config file that is includes the exports
-configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/../Config.cmake.in
                               "${CMAKE_CURRENT_BINARY_DIR}/addConfig.cmake"
                               INSTALL_DESTINATION "calc_lib/cmake"
                               NO_SET_AND_CHECK_MACRO
@@ -44,7 +44,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/addConfigVersion.cmake ${CMAKE_CURRENT
        )
 
 export(EXPORT addExport
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/add.cmake"
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/addExport.cmake"
 )
 
 
