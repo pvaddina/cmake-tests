@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(Add-Library)
 
-set (FOO_VALUE "This is a FOO cache variable" CACHE STRING "Some cache variable for demo purposes")
+set (NON_CACHE_VARIABLE "Default value of non-cache variable")
+set (STRING_CACHE_VARIABLE "Default value of cache variable" CACHE STRING "Demo string cache variable")
+set (BOOL_CACHE_VARIABLE OFF CACHE BOOL "Demo bool cache variable")
 
-message("The value of FOO_VALUE=${FOO_VALUE})
-
-
+message("NON_CACHE_VARIABLE=${NON_CACHE_VARIABLE}")
+message("STRING_CACHE_VARIABLE=${STRING_CACHE_VARIABLE}")
+message("BOOL_CACHE_VARIABLE=${BOOL_CACHE_VARIABLE}")
 
 set (SRCS src/add.cpp )
 
