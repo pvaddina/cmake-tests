@@ -22,7 +22,7 @@ BOOL_CACHE_VARIABLE=ON
 -- Build files have been written to: /home/vaddina/workspace/cmake-tests/cache-variable-demo/build
 ```
 
-After the last command execution check the file **CMakeCache.txt** and notice the values are in the text file
+After the last command execution check the file **CMakeCache.txt** and notice that the variable *NON_CACHE_VARIABLE* is defined as *uninitialized*. This is because using the command as above with *-DNON_CACHE_VARIABLE="non-cache variable is also replaced"* we have inadvertently created yet another cache variable. This is to demonstrate that one cannot change the value of a **normal** variable via the command line but only that of the **cache** variables. Trying to do so will create yet another uninitialized cache variable with the same name. 
 
 ```console
 //Demo bool cache variable
