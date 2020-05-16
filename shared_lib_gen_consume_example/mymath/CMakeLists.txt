@@ -3,15 +3,14 @@ project(MyMath-Library)
 
 include(GenerateExportHeader)
 
-set(HDR_INSTALL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/inc)
-set(LIB_INSTALL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-set (HDR_SRCS add.h mul.h)
+set (HDR_SRCS add.h mul.h ${CMAKE_CURRENT_BINARY_DIR}/mymath_exports.h)
 set (CPP_SRCS src/add.cpp src/mul.cpp)
 
 add_library(mymath SHARED ${HDR_SRCS} ${CPP_SRCS})
 
 target_include_directories(mymath 
-PUBLIC
+  PRIVATE
+  ${CMAKE_CURRENT_BINARY_DIR}
   .)
 
 # Generate the export headers automatically. The header is generated
@@ -22,6 +21,6 @@ GENERATE_EXPORT_HEADER(mymath
     EXPORT_FILE_NAME mymath_exports.h
     STATIC_DEFINE SHARED_EXPORTS_BUILT_AS_STATIC)
 
-install(TARGETS mymath DESTINATION ${LIB_INSTALL_PATH})
+install(TARGETS mymath DESTINATION mymath/lib)
 install(FILES ${HDR_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/mymath_exports.h 
-  DESTINATION ${HDR_INSTALL_PATH})
+  DESTINATION mymath/inc)
