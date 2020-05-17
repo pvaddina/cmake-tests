@@ -22,5 +22,6 @@ GENERATE_EXPORT_HEADER(mymath
     STATIC_DEFINE SHARED_EXPORTS_BUILT_AS_STATIC)
 
 install(TARGETS mymath DESTINATION mymath/lib)
+install(TARGETS mymath DESTINATION bin)
 install(FILES ${HDR_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/mymath_exports.h 
   DESTINATION mymath/inc)
