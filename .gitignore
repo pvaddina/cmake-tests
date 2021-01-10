@@ -12,3 +12,6 @@ build_win/
 ninja/
 vs/
 gen/
+install
+install_add_mul
+install_calc
