@@ -6,7 +6,7 @@ set (INSTALL_ROOT ${PROJECT_NAME})
 find_package(add_lib REQUIRED)
 find_package(mul_lib REQUIRED)
 
-set (SRCS inc/calc.h src/calc.cpp src/ctool.cpp $<TARGET_OBJECTS:calc::add_lib> $<TARGET_OBJECTS:calc::mul_lib>)
+set (SRCS inc/calc.h src/calc.cpp $<TARGET_OBJECTS:calc::add_lib> $<TARGET_OBJECTS:calc::mul_lib>)
 
 add_library(${PROJECT_NAME} SHARED ${SRCS})
 target_include_directories(${PROJECT_NAME} 
