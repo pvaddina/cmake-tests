@@ -11,7 +11,7 @@ mkDirs = []
 allOpts = {
             "linux":{
                 "addsub" : {
-                       "delDirs"    : ["gen/", "addsub/build"],
+                       "delDirs"    : ["gen/addsub", "addsub/build"],
                        "createDirs" : ["addsub/build"],
                        "workingDir" : "addsub/build",
                        "cmakeCmd"   : "cmake -DCMAKE_INSTALL_PREFIX=\"..\/..\/gen\" ..",
@@ -19,7 +19,7 @@ allOpts = {
                        "install"    : "make install",
                        },
                 "muldiv" : {
-                       "delDirs"    : ["gen/", "muldiv/build"],
+                       "delDirs"    : ["gen/muldiv", "muldiv/build"],
                        "createDirs" : ["muldiv/build"],
                        "workingDir" : "muldiv/build",
                        "cmakeCmd"   : "cmake -DCMAKE_INSTALL_PREFIX=\"..\/..\/gen\" ..",
@@ -27,7 +27,7 @@ allOpts = {
                        "install"    : "make install",
                        },
                 "arithmeticop" : {
-                       "delDirs"    : ["gen/", "arithmeticop/build"],
+                       "delDirs"    : ["gen/arithmeticop", "arithmeticop/build"],
                        "createDirs" : ["arithmeticop/build"],
                        "workingDir" : "arithmeticop/build",
                        "cmakeCmd"   : "cmake -DCMAKE_INSTALL_PREFIX=\"..\/..\/gen\" ..",
