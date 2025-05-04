@@ -1,0 +1,168 @@
+{
+  "name": "Ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".",
+    "args": {
+      "IMAGE_NAME": "ubuntu",
+      "IMAGE_VERSION": "24.04"
+    }
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "editor.formatOnSave": true
+  },
+  "containerEnv": {
+    "BUILD_OUTPUT_DIR": "${workspaceFolder}/build"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cmake-tools",
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "aaron-bond.better-comments",
+        "asciidoctor.asciidoctor-vscode",
+        "bierner.docs-view",
+        "EditorConfig.EditorConfig",
+        "jebbs.plantuml",
+        "maattdd.gitless",
+        "matepek.vscode-catch2-test-adapter",
+        "ms-vscode.hexeditor",
+        "ryanluker.vscode-coverage-gutters",
+        "SonarSource.sonarlint-vscode",
+        "usernamehw.errorlens",
+        "vadimcn.vscode-lldb",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "google.geminicodeassist"
+      ],
+      "settings": {
+        // Miscellaneous
+        "task.problemMatchers.neverPrompt": true,
+        "task.autoDetect": "off",
+        "extensions.ignoreRecommendations": true,
+        "terminal.integrated.scrollback": 100000,
+        // port-forwarding
+        "remote.autoForwardPorts": false,
+        "remote.localPortHost": "allInterfaces",
+        // editor & files
+        "editor.trimAutoWhitespace": true,
+        "editor.selectionHighlight": true,
+        "editor.renderWhitespace": "all",
+        "editor.renderControlCharacters": true,
+        "editor.bracketPairColorization.enabled": true,
+        "editor.guides.bracketPairs": "active",
+        "files.trimTrailingWhitespace": false, // TODO: enable after all code was formatted
+        "files.insertFinalNewline": true,
+        // git
+        "git.openRepositoryInParentFolders": "never",
+        // Workspace / Editor
+        "editor.tabSize": 2,
+        "search.followSymlinks": false,
+        "search.useIgnoreFiles": false,
+        "search.exclude": {
+          "build": true
+        },
+        "files.watcherExclude": {
+          "**/.git/objects/**": true,
+          "build": true,
+          "conan_user_home": true,
+          "build/coverage": false
+        },
+        "diffEditor.useInlineViewWhenSpaceIsLimited": false,
+        "diffEditor.ignoreTrimWhitespace": false,
+        // SonarQube / SonarLint
+        "sonarlint.disableTelemetry": true,
+        "sonarlint.focusOnNewCode": true,
+        "sonarlint.pathToCompileCommands": "${containerEnv:BUILD_OUTPUT_DIR}/compile_commands.json",
+        "sonarlint.analysisExcludesStandalone": "/opt/**",
+        // CMake
+        "cmake.enableAutomaticKitScan": false,
+        "cmake.automaticReconfigure": false,
+        "cmake.configureOnOpen": false,
+        "cmake.configureOnEdit": false,
+        "cmake.skipConfigureIfCachePresent": false,
+        "cmake.exportCompileCommandsFile": true,
+        "cmake.buildTask": false,
+        "cmake.clearOutputBeforeBuild": true,
+        "cmake.saveBeforeBuild": true,
+        "cmake.loadCompileCommands": true,
+        "cmake.generator": "Ninja",
+        "cmake.sourceDirectory": "${workspaceFolder}",
+        "cmake.buildDirectory": "${containerEnv:BUILD_OUTPUT_DIR}",
+        // C++ Tests
+        "cmake.ctest.testExplorerIntegrationEnabled": false,
+        "clangd.enableCodeCompletion": true,
+        "clangd.checkUpdates": false,
+        "clangd.detectExtensionConflicts": true,
+        "clangd.onConfigChanged": "prompt",
+        "clangd.arguments": [
+          "--compile-commands-dir=${containerEnv:BUILD_OUTPUT_DIR}",
+          "--query-driver=**",
+          "--background-index",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--header-insertion=never",
+          "--header-insertion-decorators",
+          "--log=error",
+          "--pretty"
+        ],
+        // AsciiDoc
+        "asciidoc.extensions.enableKroki": true,
+        "asciidoc.antora.showEnableAntoraPrompt": false,
+        // Python
+        "python.defaultInterpreterPath": "/opt/py-env/venv/bin/python3",
+        "python.analysis.typeCheckingMode": "standard",
+        "python.analysis.inlayHints.callArgumentNames": "partial",
+        "python.analysis.inlayHints.pytestParameters": true,
+        "python.analysis.inlayHints.functionReturnTypes": true,
+        "python.analysis.inlayHints.variableTypes": true,
+        "python.linting.enabled": true,
+        "python.linting.lintOnSave": true,
+        "python.terminal.activateEnvironment": false,
+        "[python]": {
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.fixAll": "explicit"
+          },
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        },
+        // Python Tests
+        "testing.defaultGutterClickAction": "contextMenu",
+        "python.testing.autoTestDiscoverOnSaveEnabled": true,
+        "python.testing.nosetestsEnabled": false,
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestPath": "/opt/py-env/venv/bin/pytest",
+        "python.testing.unittestEnabled": false,
+        // GitLess
+        "gitlens.currentLine.enabled": false,
+        "gitlens.codeLens.authors.enabled": true,
+        "gitlens.codeLens.recentChange.enabled": false,
+        "gitlens.defaultDateStyle": "absolute",
+        "gitlens.defaultDateFormat": "DD.MM.YY, HH:mm",
+        "gitlens.defaultTimeFormat": "HH:mm",
+        "gitlens.defaultDateShortFormat": "DD.MM.YY",
+        "gitlens.showWelcomeOnInstall": false,
+        "gitlens.showWhatsNewAfterUpgrades": false,
+        "gitlens.defaultGravatarsStyle": "mp",
+        "gitlens.blame.avatars": false,
+        // Error Lens
+        "errorLens.enabledDiagnosticLevels": [
+          "error",
+          "warning"
+        ],
+        "errorLens.messageBackgroundMode": "message",
+        // Gutters Coverage Extension
+        "coverage-gutters.showGutterCoverage": false,
+        "coverage-gutters.showLineCoverage": true,
+        "coverage-gutters.partialHighlightLight": "rgba(0, 255, 64, 0.2)",
+        "coverage-gutters.partialHighlightDark": "rgba(0, 122, 30, 0.4)",
+        "coverage-gutters.coverageBaseDir": "build/coverage/",
+        "coverage-gutters.coverageFileNames": [
+          "coverage.xml"
+        ]
+      }
+    }
+  },
+  "postCreateCommand": "echo $(whoami) && echo $UID && pwd && chmod +x ${containerWorkspaceFolder}/.devcontainer/setup.sh && ${containerWorkspaceFolder}/.devcontainer/setup.sh"
+}
